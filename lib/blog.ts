@@ -32,7 +32,7 @@ export function getBlogPosts(locale: string = 'en'): Omit<BlogPost, 'content'>[]
       return {
         slug,
         title: data.title || '',
-        date: data.date || '',
+        date: data.date ? String(data.date) : '',
         excerpt: data.excerpt || '',
         locale: data.locale || 'en',
       };
@@ -69,7 +69,7 @@ export function getBlogPostBySlug(slug: string, locale: string = 'en'): BlogPost
   return {
     slug,
     title: data.title || '',
-    date: data.date || '',
+    date: data.date ? String(data.date) : '',
     excerpt: data.excerpt || '',
     content: contentHtml,
     locale: data.locale || 'en',
