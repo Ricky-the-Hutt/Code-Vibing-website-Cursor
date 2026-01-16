@@ -7,15 +7,15 @@ export default function LanguageSwitcher() {
   const { locale, locales, pathname, asPath } = router;
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 text-sm">
       {locales?.map((loc) => (
         <Link
           key={loc}
           href={pathname}
           as={asPath}
           locale={loc}
-          className={`px-2 py-1 text-sm border border-primary-white hover:bg-primary-red hover:border-primary-red transition-colors ${
-            locale === loc ? 'bg-primary-red border-primary-red' : ''
+          className={`hover:underline ${
+            locale === loc ? 'font-semibold' : 'text-gray-600'
           }`}
         >
           {loc.toUpperCase()}

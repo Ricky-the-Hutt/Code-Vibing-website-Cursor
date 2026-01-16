@@ -4,7 +4,15 @@
 
 @layer base {
   body {
-    @apply bg-white text-black font-sans;
+    @apply bg-white text-gray-900 font-sans antialiased;
+  }
+  
+  a {
+    @apply text-gray-900;
+  }
+  
+  a:hover {
+    @apply text-gray-700;
   }
 }
 

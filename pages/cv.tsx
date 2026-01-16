@@ -29,33 +29,29 @@ export default function CV() {
         <meta name="description" content="Download Ricardo Lopes CV" />
       </Head>
 
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8 text-primary-black">
-            {t.heading}
-          </h1>
+      <div className="max-w-2xl mx-auto px-4 py-12">
+        <h1 className="text-4xl font-bold mb-8">{t.heading}</h1>
 
-          <div className="bg-gray-50 p-8 rounded-lg border-2 border-primary-red">
-            <p className="text-lg mb-6 text-gray-700">
-              {t.note}
-            </p>
-            <a
-              href="/cv.pdf"
-              download
-              className="inline-block bg-primary-red text-primary-white px-8 py-3 rounded hover:bg-red-700 transition-colors"
-            >
-              {t.download}
-            </a>
-          </div>
+        <div className="mb-8">
+          <p className="text-gray-700 mb-4">
+            {t.note}
+          </p>
+          <a
+            href="/cv.pdf"
+            download
+            className="inline-block text-gray-900 border border-gray-300 px-6 py-2 rounded hover:bg-gray-50 transition-colors"
+          >
+            {t.download}
+          </a>
+        </div>
 
-          {/* Placeholder for CV preview or embed */}
-          <div className="mt-8">
-            <iframe
-              src="/cv.pdf"
-              className="w-full h-screen border-2 border-gray-300 rounded"
-              title="CV Preview"
-            />
-          </div>
+        {/* Placeholder for CV preview or embed */}
+        <div className="mt-8">
+          <iframe
+            src="/cv.pdf"
+            className="w-full h-screen border border-gray-300 rounded"
+            title="CV Preview"
+          />
         </div>
       </div>
     </>

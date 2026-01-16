@@ -7,15 +7,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: {
-          black: '#000000',
-          white: '#FFFFFF',
-          red: '#DC2626',
-        },
-      },
       fontFamily: {
-        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       typography: {
         DEFAULT: {
@@ -23,22 +16,23 @@ module.exports = {
             maxWidth: 'none',
             color: '#374151',
             a: {
-              color: '#DC2626',
+              color: '#111827',
+              textDecoration: 'underline',
               '&:hover': {
-                color: '#991B1B',
+                color: '#374151',
               },
             },
             h1: {
-              color: '#000000',
+              color: '#111827',
             },
             h2: {
-              color: '#000000',
+              color: '#111827',
             },
             h3: {
-              color: '#000000',
+              color: '#111827',
             },
             strong: {
-              color: '#000000',
+              color: '#111827',
             },
           },
         },
