@@ -1,42 +1,33 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { ReactCusdis } from 'react-cusdis';
+import { useTheme } from 'next-themes';
 
 interface CommentsProps {
-  repo: string; // Format: "username/repo"
-  repoId: string; // Repository ID from Giscus
-  category: string; // Category ID from Giscus
-  categoryId: string; // Category ID from Giscus
+  appId: string;
+  host?: string;
+  pageId: string;
+  pageTitle: string;
+  pageUrl: string;
 }
 
-export default function Comments({ repo, repoId, category, categoryId }: CommentsProps) {
-  const commentsRef = useRef<HTMLDivElement>(null);
+export default function Comments({ appId, host = 'https://cusdis.com', pageId, pageTitle, pageUrl }: CommentsProps) {
+  const { theme, systemTheme } = useTheme();
 
-  useEffect(() => {
-    if (!commentsRef.current) return;
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const cusdisTheme = currentTheme === 'dark' ? 'dark' : 'light';
 
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', repo);
-    script.setAttribute('data-repo-id', repoId);
-    script.setAttribute('data-category', category);
-    script.setAttribute('data-category-id', categoryId);
-    script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
-    script.setAttribute('data-input-position', 'bottom');
-    script.setAttribute('data-theme', 'light');
-    script.setAttribute('data-lang', 'en');
-    script.crossOrigin = 'anonymous';
-    script.async = true;
-
-    commentsRef.current.appendChild(script);
-
-    return () => {
-      if (commentsRef.current && commentsRef.current.contains(script)) {
-        commentsRef.current.removeChild(script);
-      }
-    };
-  }, [repo, repoId, category, categoryId]);
-
-  return <div ref={commentsRef} className="mt-8" />;
+  return (
+    <div className="mt-8">
+      <ReactCusdis
+        attrs={{
+          host,
+          appId,
+          pageId,
+          pageTitle,
+          pageUrl,
+          theme: cusdisTheme,
+        }}
+      />
+    </div>
+  );
 }

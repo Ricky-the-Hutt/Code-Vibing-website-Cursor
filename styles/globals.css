@@ -6,13 +6,13 @@
   body {
     @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white font-sans antialiased;
   }
-  
+
   a {
-    @apply text-gray-900;
+    @apply text-lethain-blue transition-colors duration-200;
   }
-  
+
   a:hover {
-    @apply text-gray-700;
+    @apply text-lethain-blue-light;
   }
 }
 

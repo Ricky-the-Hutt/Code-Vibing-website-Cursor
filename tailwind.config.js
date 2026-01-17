@@ -9,7 +9,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sans: ['"Avenir Next"', 'Avenir', 'sans-serif'],
+      },
+      colors: {
+        'lethain-blue': '#357edd',
+        'lethain-blue-light': '#96ccff',
       },
       typography: {
         DEFAULT: {
@@ -17,10 +21,10 @@ module.exports = {
             maxWidth: 'none',
             color: '#374151',
             a: {
-              color: '#111827',
-              textDecoration: 'underline',
+              color: '#357edd',
+              textDecoration: 'none',
               '&:hover': {
-                color: '#374151',
+                color: '#96ccff',
               },
             },
             h1: {

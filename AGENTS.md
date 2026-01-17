@@ -9,6 +9,11 @@ This document outlines the rules, conventions, and guidelines for working on thi
 **Design Style:** Minimalist, inspired by [lalitm.com](https://lalitm.com)  
 **Target Audience:** Recruiters and potential employers
 
+## Technology Selection Policy
+- **Priority to Free Options:** Every solution offered for the technologies used should give priority to free options.
+- **Default Browser:** Safari
+
+
 ## Technology Stack
 
 - **Framework:** Next.js 16+ (Pages Router)

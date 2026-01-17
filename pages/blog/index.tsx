@@ -78,7 +78,10 @@ export default function Blog({ posts }: BlogProps) {
   );
 }
 
+import { generateRssFeed } from '@/lib/generate-rss';
+
 export const getStaticProps: GetStaticProps = async () => {
+  await generateRssFeed();
   const posts = getBlogPosts('en');
   return {
     props: {

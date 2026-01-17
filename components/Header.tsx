@@ -4,23 +4,36 @@ import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-200 dark:border-gray-800">
-      <nav className="max-w-2xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center space-x-4">
-            <Link href="/cv" className="hover:underline text-gray-900 dark:text-gray-100">
-              CV
+    <header className="bg-white dark:bg-gray-900">
+      <div className="pb-3 dark:pb-3">
+        <nav className="pt-5 pv3 ph2 max-w-7xl mx-auto" role="navigation">
+          <div className="flex justify-between items-center gap-4">
+            <Link href="/" className="text-2xl font-light no-underline text-gray-900 dark:text-gray-100 max-w-lg block leading-tight">
+              Looking after goodness and truth
             </Link>
-            <Link href="/blog" className="hover:underline text-gray-900 dark:text-gray-100">
-              Blog
-            </Link>
-            <Link href="/" className="hover:underline text-gray-900 dark:text-gray-100">
-              About
-            </Link>
+            <div className="flex items-center">
+              <ul className="pl-0 mr-3 flex">
+                <li className="list f5 f4-ns fw4 pr-3">
+                  <Link href="/blog" className="no-underline text-gray-900 dark:text-gray-100">
+                    Blog
+                  </Link>
+                </li>
+                <li className="list f5 f4-ns fw4 pr-3">
+                  <Link href="/cv" className="no-underline text-gray-900 dark:text-gray-100">
+                    CV
+                  </Link>
+                </li>
+                <li className="list f5 f4-ns fw4 pr-3">
+                  <Link href="/" className="no-underline text-gray-900 dark:text-gray-100">
+                    About
+                  </Link>
+                </li>
+              </ul>
+              <ThemeToggle />
+            </div>
           </div>
-          <ThemeToggle />
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }

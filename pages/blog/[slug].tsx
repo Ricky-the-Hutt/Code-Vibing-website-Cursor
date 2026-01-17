@@ -19,13 +19,9 @@ interface BlogPostProps {
 }
 
 export default function BlogPost({ post }: BlogPostProps) {
-  // Giscus configuration - Get these from https://giscus.app
-  const giscusConfig = {
-    repo: process.env.NEXT_PUBLIC_GISCUS_REPO || 'your-username/your-repo',
-    repoId: process.env.NEXT_PUBLIC_GISCUS_REPO_ID || 'your-repo-id',
-    category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY || 'General',
-    categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || 'your-category-id',
-  };
+  // Cusdis configuration
+  const cusdisAppId = process.env.NEXT_PUBLIC_CUSDIS_APP_ID || 'your-cusdis-app-id';
+
 
   return (
     <>
@@ -61,10 +57,10 @@ export default function BlogPost({ post }: BlogPostProps) {
               Comments
             </h2>
             <Comments
-              repo={giscusConfig.repo}
-              repoId={giscusConfig.repoId}
-              category={giscusConfig.category}
-              categoryId={giscusConfig.categoryId}
+              appId={cusdisAppId}
+              pageId={post.slug}
+              pageTitle={post.title}
+              pageUrl={`https://rickylopes.pt/blog/${post.slug}`}
             />
           </div>
         </article>
