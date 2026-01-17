@@ -20,6 +20,30 @@ This document outlines the rules, conventions, and guidelines for working on thi
 - **Performance:** Vercel Speed Insights
 - **Comments:** Giscus (optional)
 
+## Functional Specifications
+
+### Core Features
+- [ ] Contact form
+- [ ] Newsletter/email subscription
+- [x] Blog/news section
+- [x] Search functionality
+- [ ] User authentication/login
+- [ ] E-commerce/shopping cart
+- [x] Social media integration
+- [ ] Comments system
+- [ ] Image galleries/portfolios
+- [ ] Video embeds
+- [ ] Live chat
+- [ ] Booking/scheduling system
+
+### Third-Party Integrations
+- **Analytics:** Google Analytics
+- **Email service:** Free tier provider (TBD)
+- **Payment processing:** No
+- **Social media:** LinkedIn
+- **Maps:** Google Maps (if needed)
+
+
 ## Design Principles
 
 ### Visual Style
@@ -143,6 +167,38 @@ NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-category-id
 - **Image optimization:** Use Next.js Image component if images are added
 - **Code splitting:** Automatic with Next.js
 - **Lazy loading:** Use for heavy components if needed
+
+## System Requirements
+
+### Browser Compatibility
+- **Minimum browser versions:** Chrome, Firefox, Safari, Edge (last 2 versions)
+- **Mobile browsers:** iOS Safari, Chrome Mobile
+- **Accessibility:** Basic compliance
+
+### Security
+- **HTTPS:** Enforced
+- **Data protection:** GDPR compliance required
+- **User data:** No storage of user data implemented
+- **API security:** N/A (Static/Client-side)
+
+## Testing & Quality Assurance
+
+### Testing Requirements
+- **Browser testing:** Chrome, Firefox, Safari, Edge
+- **Functionality testing:** All features must be verified
+- **Performance testing:** Vercel Speed Insights + Lighthouse
+- **User acceptance testing:** Owner review
+
+## Launch Checklist
+- [ ] Domain connected
+- [ ] SSL certificate active
+- [ ] Analytics configured
+- [ ] All forms tested
+- [ ] All links working
+- [ ] Mobile responsive verified
+- [ ] SEO meta tags added
+- [ ] Social media previews tested
+
 
 ## Git Workflow
 
