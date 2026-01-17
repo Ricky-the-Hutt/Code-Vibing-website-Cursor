@@ -94,7 +94,7 @@ List all features you need:
 - **Analytics:** Google Analytics
 - **Email service:** You choose a free one
 - **Payment processing:** No
-- **Social media:** X, Instagram
+- **Social media:** LinkedIn
 - **Maps:** google maps
 - **Other APIs:** None
 

@@ -151,7 +151,7 @@ NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-category-id
 - **Examples:**
   - "Add Vercel Speed Insights for performance monitoring"
   - "Redesign website to match minimalist lalitm.com style"
-  - "Remove social media links from footer"
+
 
 ### Branching
 - **Main branch:** `main`
@@ -182,10 +182,7 @@ NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-category-id
 - [ ] **Tags/categories:** Add tagging system for blog posts
 
 ### Social Media (If Re-added)
-- [ ] **X (Twitter):** URL: _______________
-- [ ] **Instagram:** URL: _______________
-- [ ] **LinkedIn:** URL: _______________
-- [ ] **GitHub:** URL: _______________
+- [ ] **LinkedIn:** URL: https://www.linkedin.com/in/ricardogalopes/
 
 ## Common Tasks
 
@@ -218,7 +215,7 @@ NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-category-id
 - ❌ Don't add unnecessary JavaScript
 - ❌ Don't break the minimalist aesthetic
 - ❌ Don't use custom fonts (stick to system fonts)
-- ❌ Don't add social media icons (removed per requirements)
+- ❌ Don't add X (Twitter) or Instagram icons (removed per requirements)
 
 ### What TO Do
 - ✅ Keep design clean and minimal
