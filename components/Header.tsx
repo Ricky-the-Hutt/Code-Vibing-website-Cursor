@@ -1,42 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import LanguageSwitcher from './LanguageSwitcher';
-
-const translations = {
-  en: {
-    about: 'About',
-    blog: 'Blog',
-    cv: 'CV',
-  },
-  pt: {
-    about: 'Sobre',
-    blog: 'Blog',
-    cv: 'CV',
-  },
-};
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
-  const router = useRouter();
-  const { locale } = router;
-  const t = translations[locale as keyof typeof translations] || translations.en;
-
   return (
-    <header className="border-b border-gray-200">
+    <header className="border-b border-gray-200 dark:border-gray-800">
       <nav className="max-w-2xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center space-x-4">
-            <Link href="/cv" className="hover:underline">
-              {t.cv}
+            <Link href="/cv" className="hover:underline text-gray-900 dark:text-gray-100">
+              CV
             </Link>
-            <Link href="/blog" className="hover:underline">
-              {t.blog}
+            <Link href="/blog" className="hover:underline text-gray-900 dark:text-gray-100">
+              Blog
             </Link>
-            <Link href="/" className="hover:underline">
-              {t.about}
+            <Link href="/" className="hover:underline text-gray-900 dark:text-gray-100">
+              About
             </Link>
           </div>
-          <LanguageSwitcher />
+          <ThemeToggle />
         </div>
       </nav>
     </header>
