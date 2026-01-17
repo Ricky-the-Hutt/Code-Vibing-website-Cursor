@@ -26,6 +26,27 @@ export default function SocialMediaLinks() {
           <circle cx="4" cy="4" r="2" />
         </svg>
       </a>
+      <a
+        href="https://github.com/Ricky-the-Hutt"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-600 hover:text-black transition-colors ml-4"
+        aria-label="GitHub"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C3.68.65 2.5 1 2.5 1a5.07 5.07 0 0 0-.09 3.77A5.44 5.44 0 0 0 2.43 9.68 5.44 5.44 0 0 0 2.43 9.68c0 5.38 3.2 6.54 6.34 6.91a2.02 2.02 0 0 0 .54 1.34V20" />
+        </svg>
+      </a>
     </div>
   );
 }
