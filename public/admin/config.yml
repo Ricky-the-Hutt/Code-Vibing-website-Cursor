@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: Ricky-the-Hutt/Code-Vibing-website
   branch: main
+  base_url: https://rickylopes.pt # This should be the production URL
+  auth_endpoint: api/auth
 
 local_backend: true
 
@@ -19,3 +22,13 @@ collections:
       - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Excerpt", name: "excerpt", widget: "string"}
       - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About Page"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
