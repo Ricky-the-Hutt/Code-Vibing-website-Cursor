@@ -37,7 +37,7 @@ export default function Blog({ posts }: BlogProps) {
       </Head>
 
       <div className="max-w-2xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-gray-900 dark:text-white">Blog & News</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-900 dark:text-gray-300">Blog & News</h1>
 
         {/* Search Bar */}
         <div className="mb-8">
@@ -46,7 +46,7 @@ export default function Blog({ posts }: BlogProps) {
             placeholder="Search posts..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded focus:border-gray-500 dark:focus:border-gray-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded focus:border-gray-500 dark:focus:border-gray-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-300"
           />
         </div>
 
@@ -58,10 +58,10 @@ export default function Blog({ posts }: BlogProps) {
             {filteredPosts.map((post) => (
               <article
                 key={post.slug}
-                className="border-b border-gray-200 dark:border-gray-800 pb-6 last:border-b-0"
+                className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0"
               >
                 <Link href={`/blog/${post.slug}`} className="block group">
-                  <h2 className="text-xl font-semibold mb-2 group-hover:underline text-gray-900 dark:text-white">
+                  <h2 className="text-xl font-semibold mb-2 group-hover:underline text-gray-900 dark:text-gray-300">
                     {post.title}
                   </h2>
                   <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">

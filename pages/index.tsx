@@ -25,7 +25,7 @@ export default function Home({ recentPosts }: HomeProps) {
 
       <div className="max-w-2xl mx-auto px-4 py-12">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Ricardo Lopes</h1>
+          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">Ricardo Lopes</h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills.
           </p>
@@ -33,10 +33,10 @@ export default function Home({ recentPosts }: HomeProps) {
 
         {recentPosts.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Blog</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-300">Blog</h2>
             <div className="space-y-6">
               {recentPosts.map((post) => (
-                <article key={post.slug} className="border-b border-gray-200 dark:border-gray-800 pb-6 last:border-b-0">
+                <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
                   <Link href={`/blog/${post.slug}`} className="block group">
                     <h3 className="text-xl font-semibold mb-2 group-hover:underline text-gray-900 dark:text-gray-100">
                       {post.title}
