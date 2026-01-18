@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Layout from '@/components/Layout';
 import CountlyAnalytics from '@/components/CountlyAnalytics';
 import ConvertExperiments from '@/components/ConvertExperiments';
+import CookieConsentBanner from '@/components/CookieConsent';
 import { ThemeProvider } from 'next-themes';
 import '@/styles/globals.css';
 
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <CountlyAnalytics />
         <SpeedInsights />
         <Component {...pageProps} key={router.asPath} />
+        <CookieConsentBanner />
       </Layout>
     </ThemeProvider>
   );

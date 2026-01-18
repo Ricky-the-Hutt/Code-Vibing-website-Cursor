@@ -193,6 +193,7 @@ NEXT_PUBLIC_DEPLOY_DATE=
 ### Security
 - **HTTPS:** Enforced
 - **Data protection:** GDPR compliance required
+- **Cookie consent:** Implemented for analytics and A/B testing
 - **User data:** No storage of user data implemented
 - **API security:** N/A (Static/Client-side)
 

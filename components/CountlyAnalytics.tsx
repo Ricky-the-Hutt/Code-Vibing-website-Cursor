@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 declare global {
@@ -11,15 +11,45 @@ declare global {
 
 export default function CountlyAnalytics() {
   const router = useRouter();
+  const [consentGiven, setConsentGiven] = useState(false);
   const COUNTLY_APP_KEY = process.env.NEXT_PUBLIC_COUNTLY_APP_KEY;
   const COUNTLY_SERVER_URL = process.env.NEXT_PUBLIC_COUNTLY_SERVER_URL || 'https://us-try.count.ly';
 
+  // Check for cookie consent
   useEffect(() => {
-    if (!COUNTLY_APP_KEY) return;
+    const checkConsent = () => {
+      const consent = localStorage.getItem('cookie-consent');
+      setConsentGiven(consent === 'true');
+    };
+
+    // Check immediately
+    checkConsent();
+
+    // Listen for storage changes (in case consent is given in another tab)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'cookie-consent') {
+        checkConsent();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Also check periodically in case consent is given in the same tab
+    const interval = setInterval(checkConsent, 1000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Only load Countly if consent is given and we have the required config
+    if (!consentGiven || !COUNTLY_APP_KEY) return;
 
     // Load Countly SDK - try direct from Countly server
     const loadCountlySDK = () => {
-      console.log('Attempting to load Countly SDK...');
+      console.log('Loading Countly SDK with user consent...');
 
       // Try loading from the Countly server first
       const script = document.createElement('script');
@@ -27,16 +57,10 @@ export default function CountlyAnalytics() {
       script.async = true;
 
       script.onload = () => {
-        console.log('Countly script loaded, checking for Countly object...');
-        console.log('window.Countly:', window.Countly);
+        console.log('Countly script loaded, initializing...');
 
         if (typeof window.Countly !== 'undefined') {
           try {
-            console.log('Initializing Countly with:', {
-              app_key: COUNTLY_APP_KEY,
-              url: COUNTLY_SERVER_URL
-            });
-
             window.Countly.init({
               app_key: COUNTLY_APP_KEY,
               url: COUNTLY_SERVER_URL,
@@ -50,7 +74,7 @@ export default function CountlyAnalytics() {
             // Track sessions
             window.Countly.track_sessions();
 
-            console.log('Countly initialized successfully');
+            console.log('Countly initialized successfully with consent');
           } catch (error) {
             console.error('Countly initialization error:', error);
           }
@@ -61,7 +85,7 @@ export default function CountlyAnalytics() {
         }
       };
 
-      script.onerror = (error) => {
+      script.onerror = () => {
         console.error('Failed to load Countly SDK from server, trying fallback...');
         loadFallbackSDK();
       };
@@ -77,7 +101,7 @@ export default function CountlyAnalytics() {
       fallbackScript.async = true;
 
       fallbackScript.onload = () => {
-        console.log('Fallback script loaded, checking Countly object...');
+        console.log('Fallback script loaded, initializing Countly...');
         if (typeof window.Countly !== 'undefined') {
           try {
             window.Countly.init({
