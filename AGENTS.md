@@ -21,7 +21,7 @@ This document outlines the rules, conventions, and guidelines for working on thi
 - **Styling:** Tailwind CSS
 - **Content Management:** Markdown files for blog posts
 - **Deployment:** Vercel
-- **Analytics:** Plausible Analytics (privacy-focused) + Vercel Analytics
+- **Analytics:** Google Analytics (optional)
 - **Performance:** Vercel Speed Insights
 - **Comments:** Giscus (optional)
 
@@ -146,39 +146,22 @@ This document outlines the rules, conventions, and guidelines for working on thi
 ### Environment Variables
 Create `.env.local` for local development:
 ```
-# Plausible Analytics (privacy-focused - optional)
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rickylopes.pt
+# Google Analytics 4
+NEXT_PUBLIC_GA_ID=your-google-analytics-4-measurement-id
 
-# Google Analytics (optional - not recommended for privacy)
-NEXT_PUBLIC_GA_ID=your-google-analytics-id
+# Google Optimize
+NEXT_PUBLIC_GOOGLE_OPTIMIZE_ID=your-google-optimize-container-id
 
 # Giscus Comments (optional)
 NEXT_PUBLIC_GISCUS_REPO=your-username/your-repo
 NEXT_PUBLIC_GISCUS_REPO_ID=your-repo-id
 NEXT_PUBLIC_GISCUS_CATEGORY=General
 NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-category-id
+
+# Version and Deploy Date (auto-set by Vercel)
+NEXT_PUBLIC_VERSION=1.0.0
+NEXT_PUBLIC_DEPLOY_DATE=
 ```
-
-### Analytics Setup
-
-#### Plausible Analytics (Recommended - Privacy-Focused)
-- **Features:** GDPR compliant, no cookies, privacy-first
-- **Free tier:** 10,000 pageviews/month
-- **Setup:** Already integrated - just update domain in `_document.tsx`
-- **Dashboard:** https://plausible.io/rickylopes.pt (after setup)
-
-#### Vercel Analytics (Already Integrated)
-- **Features:** Real-time analytics, no privacy concerns
-- **Free tier:** Unlimited with Vercel hosting
-- **Setup:** Automatically enabled with `<Analytics />` component
-
-#### A/B Testing Options (Free)
-1. **Microsoft Clarity** - Free, includes A/B testing
-2. **Google Optimize** - Free, requires GA4 (privacy concerns)
-3. **VWO Free** - Limited A/B testing features
-
-#### Cookie Consent (GDPR Compliance)
-Consider adding cookie consent banner for EU visitors if using tracking.
 
 ## Code Quality Rules
 
@@ -243,7 +226,6 @@ Consider adding cookie consent banner for EU visitors if using tracking.
 ### Branching
 - **Main branch:** `main`
 - **Deployment:** Auto-deploys from `main` branch
-- **Repository:** https://github.com/Ricky-the-Hutt/Code-Vibing-website
 
 ## Areas to Fill In Later
 
