@@ -243,6 +243,7 @@ Consider adding cookie consent banner for EU visitors if using tracking.
 ### Branching
 - **Main branch:** `main`
 - **Deployment:** Auto-deploys from `main` branch
+- **Repository:** https://github.com/Ricky-the-Hutt/Code-Vibing-website
 
 ## Areas to Fill In Later
 
