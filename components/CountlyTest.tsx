@@ -54,7 +54,7 @@ export default function CountlyTest() {
       });
       setTestResults(prev => [...prev, '📤 Test event sent']);
     } catch (error) {
-      setTestResults(prev => [...prev, `❌ Event error: ${error.message}`]);
+      setTestResults(prev => [...prev, `❌ Event error: ${error instanceof Error ? error.message : 'Unknown error'}`]);
     }
   };
 
@@ -63,7 +63,7 @@ export default function CountlyTest() {
       trackConversion('test_conversion', 1);
       setTestResults(prev => [...prev, '🎯 Test conversion sent']);
     } catch (error) {
-      setTestResults(prev => [...prev, `❌ Conversion error: ${error.message}`]);
+      setTestResults(prev => [...prev, `❌ Conversion error: ${error instanceof Error ? error.message : 'Unknown error'}`]);
     }
   };
 
@@ -92,7 +92,7 @@ export default function CountlyTest() {
         setTestResults(prev => [...prev, '❌ Countly object not available for manual init']);
       }
     } catch (error) {
-      setTestResults(prev => [...prev, `❌ Manual init error: ${error.message}`]);
+      setTestResults(prev => [...prev, `❌ Manual init error: ${error instanceof Error ? error.message : 'Unknown error'}`]);
     }
   };
 
