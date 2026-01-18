@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getBlogPosts } from '@/lib/blog';
 import { GetStaticProps } from 'next';
 import { format } from 'date-fns';
-import CountlyTest from '@/components/CountlyTest';
 
 interface HomeProps {
   recentPosts: Array<{
@@ -58,11 +57,6 @@ export default function Home({ recentPosts }: HomeProps) {
           </section>
         )}
 
-        {/* Countly Test Component - Remove after testing */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-6">Analytics Test</h2>
-          <CountlyTest />
-        </section>
       </div>
     </>
   );
