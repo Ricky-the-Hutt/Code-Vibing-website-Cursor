@@ -139,7 +139,10 @@ This document outlines the rules, conventions, and guidelines for working on thi
 - **Auto-deploy:** Enabled via GitHub integration
 - **Build command:** `npm run build`
 - **Environment variables:** Set in Vercel dashboard
+- **Analytics:** Vercel Analytics enabled (real-time visitor data)
 - **Speed Insights:** Automatically enabled on Vercel
+- **Custom Domain:** ricardolopes.com (configure in Vercel dashboard)
+- **Default Domain:** ricardo-lopes-website.vercel.app
 
 ### Environment Variables
 Create `.env.local` for local development:

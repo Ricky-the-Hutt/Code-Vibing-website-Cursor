@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from '@/components/Layout';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { ThemeProvider } from 'next-themes';
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider attribute="class">
       <Layout>
         <GoogleAnalytics />
+        <Analytics />
         <SpeedInsights />
         <Component {...pageProps} key={router.asPath} />
       </Layout>
