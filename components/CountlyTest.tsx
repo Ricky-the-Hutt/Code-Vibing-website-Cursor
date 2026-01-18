@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { trackEvent, trackConversion } from './GoogleAnalytics';
+import { trackEvent, trackConversion } from './CountlyAnalytics';
 
 export default function CountlyTest() {
   const [isCountlyLoaded, setIsCountlyLoaded] = useState(false);

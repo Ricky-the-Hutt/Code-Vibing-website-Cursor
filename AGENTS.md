@@ -21,7 +21,7 @@ This document outlines the rules, conventions, and guidelines for working on thi
 - **Styling:** Tailwind CSS
 - **Content Management:** Markdown files for blog posts
 - **Deployment:** Vercel
-- **Analytics:** Google Analytics (optional)
+- **Analytics:** Countly Flex (privacy-focused)
 - **Performance:** Vercel Speed Insights
 - **Comments:** Giscus (optional)
 
@@ -42,7 +42,7 @@ This document outlines the rules, conventions, and guidelines for working on thi
 - [ ] Booking/scheduling system
 
 ### Third-Party Integrations
-- **Analytics:** Google Analytics
+- **Analytics:** Countly Flex
 - **Email service:** Free tier provider (TBD)
 - **Payment processing:** No
 - **Social media:** LinkedIn

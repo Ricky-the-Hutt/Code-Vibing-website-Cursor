@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { getConvertVariant } from './GoogleOptimize';
+import { getConvertVariant } from './ConvertExperiments';
 
 // Example A/B test component for different button colors using Convert.com
 export default function ABTestButton() {

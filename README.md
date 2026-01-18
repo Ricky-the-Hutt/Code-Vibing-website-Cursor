@@ -9,7 +9,7 @@ My first Code Vibing website using Cursor, built with Next.js, TypeScript, and T
 - ✅ Search functionality
 - ✅ Social media integration (X, Instagram)
 - ✅ Comments system (Giscus)
-- ✅ Google Analytics integration
+- ✅ Countly Flex analytics integration
 - ✅ Responsive design with hamburger menu
 - ✅ CV download page
 - ✅ Minimalist design (Black, White, Red)
@@ -34,7 +34,7 @@ cp .env.example .env.local
 ```
 
 3. Update the `.env.local` file with your configuration:
-   - Google Analytics ID (optional)
+   - Countly App Key (optional)
    - Giscus configuration (for comments)
 
 ### Development
@@ -116,7 +116,7 @@ Your content here...
 
 ## Configuration
 
-### Google Analytics
+### Countly Analytics
 
 1. Get your GA tracking ID
 2. Add it to `.env.local` as `NEXT_PUBLIC_GA_ID`

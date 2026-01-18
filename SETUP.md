@@ -10,7 +10,7 @@
 2. **Environment Variables**
    Create a `.env.local` file in the root directory with the following variables:
    ```
-   # Google Analytics (optional)
+   # Countly Analytics (optional)
    NEXT_PUBLIC_GA_ID=your-google-analytics-id
    
    # Giscus Comments (optional - get from https://giscus.app)
