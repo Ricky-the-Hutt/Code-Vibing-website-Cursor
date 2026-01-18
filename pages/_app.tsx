@@ -14,8 +14,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider attribute="class">
       <Layout>
         <GoogleAnalytics />
-        <Analytics />
         <SpeedInsights />
+        <Analytics />
         <Component {...pageProps} key={router.asPath} />
       </Layout>
     </ThemeProvider>

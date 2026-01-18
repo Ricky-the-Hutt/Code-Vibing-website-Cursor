@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { PlausibleScript } from 'next-plausible';
 
 export default function Document() {
   return (
@@ -14,6 +15,8 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        {/* Plausible Analytics */}
+        <PlausibleScript domain="rickylopes.pt" />
       </Head>
       <body>
         <Main />

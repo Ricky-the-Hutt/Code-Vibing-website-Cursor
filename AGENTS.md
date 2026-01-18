@@ -21,7 +21,7 @@ This document outlines the rules, conventions, and guidelines for working on thi
 - **Styling:** Tailwind CSS
 - **Content Management:** Markdown files for blog posts
 - **Deployment:** Vercel
-- **Analytics:** Google Analytics (optional)
+- **Analytics:** Plausible Analytics (privacy-focused) + Vercel Analytics
 - **Performance:** Vercel Speed Insights
 - **Comments:** Giscus (optional)
 
@@ -139,7 +139,6 @@ This document outlines the rules, conventions, and guidelines for working on thi
 - **Auto-deploy:** Enabled via GitHub integration
 - **Build command:** `npm run build`
 - **Environment variables:** Set in Vercel dashboard
-- **Analytics:** Vercel Analytics enabled (real-time visitor data)
 - **Speed Insights:** Automatically enabled on Vercel
 - **Custom Domain:** ricardolopes.com (configure in Vercel dashboard)
 - **Default Domain:** ricardo-lopes-website.vercel.app
@@ -147,7 +146,10 @@ This document outlines the rules, conventions, and guidelines for working on thi
 ### Environment Variables
 Create `.env.local` for local development:
 ```
-# Google Analytics (optional)
+# Plausible Analytics (privacy-focused - optional)
+NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rickylopes.pt
+
+# Google Analytics (optional - not recommended for privacy)
 NEXT_PUBLIC_GA_ID=your-google-analytics-id
 
 # Giscus Comments (optional)
@@ -156,6 +158,27 @@ NEXT_PUBLIC_GISCUS_REPO_ID=your-repo-id
 NEXT_PUBLIC_GISCUS_CATEGORY=General
 NEXT_PUBLIC_GISCUS_CATEGORY_ID=your-category-id
 ```
+
+### Analytics Setup
+
+#### Plausible Analytics (Recommended - Privacy-Focused)
+- **Features:** GDPR compliant, no cookies, privacy-first
+- **Free tier:** 10,000 pageviews/month
+- **Setup:** Already integrated - just update domain in `_document.tsx`
+- **Dashboard:** https://plausible.io/rickylopes.pt (after setup)
+
+#### Vercel Analytics (Already Integrated)
+- **Features:** Real-time analytics, no privacy concerns
+- **Free tier:** Unlimited with Vercel hosting
+- **Setup:** Automatically enabled with `<Analytics />` component
+
+#### A/B Testing Options (Free)
+1. **Microsoft Clarity** - Free, includes A/B testing
+2. **Google Optimize** - Free, requires GA4 (privacy concerns)
+3. **VWO Free** - Limited A/B testing features
+
+#### Cookie Consent (GDPR Compliance)
+Consider adding cookie consent banner for EU visitors if using tracking.
 
 ## Code Quality Rules
 
