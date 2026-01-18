@@ -1,22 +1,22 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { getOptimizeVariant } from './GoogleOptimize';
+import { getConvertVariant } from './GoogleOptimize';
 
-// Example A/B test component for different button colors
+// Example A/B test component for different button colors using Convert.com
 export default function ABTestButton() {
   const [variant, setVariant] = useState<'control' | 'variant-a' | 'variant-b'>('control');
 
   useEffect(() => {
-    // Get variant from Google Optimize
-    const experimentId = 'your-experiment-id'; // Replace with actual experiment ID
-    const optimizeVariant = getOptimizeVariant(experimentId);
+    // Get variant from Convert.com experiment
+    const experimentId = '100000000'; // Replace with your actual experiment ID from Convert.com
+    const convertVariant = getConvertVariant(experimentId);
 
-    if (optimizeVariant === '0') {
+    if (convertVariant === '100000001') { // Control variation
       setVariant('control');
-    } else if (optimizeVariant === '1') {
+    } else if (convertVariant === '100000002') { // Variant A
       setVariant('variant-a');
-    } else if (optimizeVariant === '2') {
+    } else if (convertVariant === '100000003') { // Variant B
       setVariant('variant-b');
     }
   }, []);
@@ -31,7 +31,7 @@ export default function ABTestButton() {
     <button
       className={`px-6 py-3 text-white font-semibold rounded-lg transition-colors ${buttonStyles[variant]}`}
       onClick={() => {
-        // Track conversion in Google Analytics
+        // Track conversion in Convert.com (automatic) and Google Analytics
         if (typeof window !== 'undefined' && window.gtag) {
           window.gtag('event', 'button_click', {
             event_category: 'engagement',

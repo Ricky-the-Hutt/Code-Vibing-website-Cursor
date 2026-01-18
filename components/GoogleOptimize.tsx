@@ -5,34 +5,29 @@ import { useRouter } from 'next/router';
 
 declare global {
   interface Window {
-    gtag: (
-      command: string,
-      targetId: string,
-      config?: Record<string, any>
-    ) => void;
-    google_optimize?: {
-      get: (experimentId: string) => string | undefined;
+    convert?: {
+      experiments?: Record<string, any>;
     };
   }
 }
 
-export default function GoogleOptimize() {
+export default function ConvertExperiments() {
   const router = useRouter();
-  const GOOGLE_OPTIMIZE_ID = process.env.NEXT_PUBLIC_GOOGLE_OPTIMIZE_ID;
+  const CONVERT_PROJECT_ID = process.env.NEXT_PUBLIC_CONVERT_PROJECT_ID;
 
   useEffect(() => {
-    if (!GOOGLE_OPTIMIZE_ID) return;
+    if (!CONVERT_PROJECT_ID) return;
 
-    // Load Google Optimize
+    // Load Convert.com tracking script
     const script = document.createElement('script');
-    script.src = `https://www.googleoptimize.com/optimize.js?id=${GOOGLE_OPTIMIZE_ID}`;
+    script.src = `//cdn-4.convertexperiments.com/js/${CONVERT_PROJECT_ID}.js`;
     script.async = true;
     document.head.appendChild(script);
 
     // Track page views for experiments
     const handleRouteChange = () => {
-      if (window.gtag) {
-        window.gtag('event', 'optimize.page_change');
+      if (typeof window !== 'undefined' && window.convert) {
+        // Convert.com automatically handles page tracking
       }
     };
 
@@ -40,9 +35,9 @@ export default function GoogleOptimize() {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events, GOOGLE_OPTIMIZE_ID]);
+  }, [router.events, CONVERT_PROJECT_ID]);
 
-  if (!GOOGLE_OPTIMIZE_ID) {
+  if (!CONVERT_PROJECT_ID) {
     return null;
   }
 
@@ -50,9 +45,10 @@ export default function GoogleOptimize() {
 }
 
 // Utility function to get variant for A/B testing
-export function getOptimizeVariant(experimentId: string): string | null {
-  if (typeof window !== 'undefined' && window.google_optimize) {
-    return window.google_optimize.get(experimentId) || null;
+export function getConvertVariant(experimentId: string): string | null {
+  if (typeof window !== 'undefined' && window.convert?.experiments) {
+    const experiment = window.convert.experiments[experimentId];
+    return experiment?.variation || null;
   }
   return null;
 }

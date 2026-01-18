@@ -149,8 +149,8 @@ Create `.env.local` for local development:
 # Google Analytics 4
 NEXT_PUBLIC_GA_ID=your-google-analytics-4-measurement-id
 
-# Google Optimize
-NEXT_PUBLIC_GOOGLE_OPTIMIZE_ID=your-google-optimize-container-id
+# Convert.com (A/B Testing)
+NEXT_PUBLIC_CONVERT_PROJECT_ID=your-convert-project-id
 
 # Giscus Comments (optional)
 NEXT_PUBLIC_GISCUS_REPO=your-username/your-repo
