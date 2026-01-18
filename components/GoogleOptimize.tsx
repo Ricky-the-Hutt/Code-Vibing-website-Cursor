@@ -20,7 +20,7 @@ export default function ConvertExperiments() {
 
     // Load Convert.com tracking script
     const script = document.createElement('script');
-    script.src = `//cdn-4.convertexperiments.com/js/${CONVERT_PROJECT_ID}.js`;
+    script.src = `//cdn-3.convertexperiments.com/js/${CONVERT_PROJECT_ID}.js`;
     script.async = true;
     document.head.appendChild(script);
 

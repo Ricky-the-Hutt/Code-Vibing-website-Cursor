@@ -31,11 +31,14 @@ export default function ABTestButton() {
     <button
       className={`px-6 py-3 text-white font-semibold rounded-lg transition-colors ${buttonStyles[variant]}`}
       onClick={() => {
-        // Track conversion in Convert.com (automatic) and Google Analytics
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'button_click', {
-            event_category: 'engagement',
-            event_label: variant,
+        // Track conversion in Convert.com (automatic) and Countly
+        if (typeof window !== 'undefined' && window.Countly) {
+          window.Countly.add_event({
+            key: 'button_click',
+            segmentation: {
+              variant: variant,
+              experiment: 'button_color_test'
+            }
           });
         }
       }}

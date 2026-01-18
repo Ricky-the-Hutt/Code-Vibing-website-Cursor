@@ -146,8 +146,9 @@ This document outlines the rules, conventions, and guidelines for working on thi
 ### Environment Variables
 Create `.env.local` for local development:
 ```
-# Google Analytics 4
-NEXT_PUBLIC_GA_ID=your-google-analytics-4-measurement-id
+# Countly Flex (Analytics)
+NEXT_PUBLIC_COUNTLY_APP_KEY=your-countly-app-key
+NEXT_PUBLIC_COUNTLY_SERVER_URL=https://us-try.count.ly
 
 # Convert.com (A/B Testing)
 NEXT_PUBLIC_CONVERT_PROJECT_ID=your-convert-project-id
