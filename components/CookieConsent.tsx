@@ -95,16 +95,12 @@ export default function CookieConsentBanner() {
         <h3 className="font-semibold mb-2">🍪 Cookie Preferences</h3>
         <p className="mb-3">
           We use cookies to enhance your browsing experience, analyze site traffic, and personalize content.
-          By clicking "Accept", you consent to our use of cookies for analytics and A/B testing purposes.
+          By clicking "Accept", you consent to our use of cookies for analytics.
         </p>
         <div className="text-sm opacity-90">
           <p className="mb-2">
-            <strong>Analytics:</strong> We use Countly to understand how visitors use our site.
+            <strong>Analytics:</strong> 
             This helps us improve the user experience.
-          </p>
-          <p>
-            <strong>A/B Testing:</strong> We may use Convert.com to test different versions of our site
-            to optimize performance and user experience.
           </p>
         </div>
         <p className="text-sm mt-3 opacity-75">
