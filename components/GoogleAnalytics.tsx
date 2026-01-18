@@ -14,27 +14,19 @@ export default function CountlyAnalytics() {
   const COUNTLY_APP_KEY = process.env.NEXT_PUBLIC_COUNTLY_APP_KEY;
   const COUNTLY_SERVER_URL = process.env.NEXT_PUBLIC_COUNTLY_SERVER_URL || 'https://us-try.count.ly';
 
-  // Check for demo mode
-  const isDemoMode = typeof window !== 'undefined' && window.localStorage?.getItem('countly_demo_mode') === 'true';
-  const effectiveAppKey = COUNTLY_APP_KEY || (isDemoMode ? 'demo-app-key' : null);
-  const effectiveServerUrl = COUNTLY_SERVER_URL || (isDemoMode ? 'https://us-try.count.ly' : null);
-
   useEffect(() => {
-    if (!effectiveAppKey) return;
+    if (!COUNTLY_APP_KEY) return;
 
-    // Load Countly SDK
+    // Load Countly SDK from the server
     const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/countly-sdk-web@latest/lib/countly.min.js';
+    script.src = `${COUNTLY_SERVER_URL}/sdk/web/countly.min.js`;
     script.async = true;
-    script.onerror = () => {
-      console.warn('Failed to load Countly SDK');
-    };
     script.onload = () => {
-      if (window.Countly) {
+      if (typeof window.Countly !== 'undefined') {
         window.Countly.init({
-          app_key: effectiveAppKey,
-          url: effectiveServerUrl,
-          debug: process.env.NODE_ENV === 'development' || isDemoMode
+          app_key: COUNTLY_APP_KEY,
+          url: COUNTLY_SERVER_URL,
+          debug: process.env.NODE_ENV === 'development'
         });
 
         // Track initial page view
@@ -42,10 +34,6 @@ export default function CountlyAnalytics() {
 
         // Track sessions
         window.Countly.track_sessions();
-
-        if (isDemoMode) {
-          console.log('Countly Demo Mode: Analytics initialized');
-        }
       }
     };
     document.head.appendChild(script);
@@ -61,9 +49,9 @@ export default function CountlyAnalytics() {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events, effectiveAppKey, effectiveServerUrl, isDemoMode]);
+  }, [router.events, COUNTLY_APP_KEY, COUNTLY_SERVER_URL]);
 
-  if (!effectiveAppKey) {
+  if (!COUNTLY_APP_KEY) {
     return null;
   }
 
@@ -72,7 +60,7 @@ export default function CountlyAnalytics() {
 
 // Utility functions for custom tracking
 export const trackEvent = (key: string, segmentation?: Record<string, any>) => {
-  if (typeof window !== 'undefined' && window.Countly) {
+  if (typeof window !== 'undefined' && typeof window.Countly !== 'undefined') {
     window.Countly.add_event({
       key,
       segmentation
@@ -81,7 +69,7 @@ export const trackEvent = (key: string, segmentation?: Record<string, any>) => {
 };
 
 export const trackConversion = (key: string, value?: number) => {
-  if (typeof window !== 'undefined' && window.Countly) {
+  if (typeof window !== 'undefined' && typeof window.Countly !== 'undefined') {
     window.Countly.add_event({
       key,
       count: value || 1
