@@ -17,26 +17,46 @@ export default function CountlyAnalytics() {
   useEffect(() => {
     if (!COUNTLY_APP_KEY) return;
 
-    // Load Countly SDK from the server
-    const script = document.createElement('script');
-    script.src = `${COUNTLY_SERVER_URL}/sdk/web/countly.min.js`;
-    script.async = true;
-    script.onload = () => {
-      if (typeof window.Countly !== 'undefined') {
-        window.Countly.init({
-          app_key: COUNTLY_APP_KEY,
-          url: COUNTLY_SERVER_URL,
-          debug: process.env.NODE_ENV === 'development'
-        });
+    // Load Countly SDK - try multiple sources
+    const loadCountlySDK = () => {
+      // First try the official Countly CDN
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/countly-sdk-web@latest/lib/countly.min.js';
+      script.async = true;
 
-        // Track initial page view
-        window.Countly.track_pageview();
+      script.onload = () => {
+        if (typeof window.Countly !== 'undefined') {
+          try {
+            window.Countly.init({
+              app_key: COUNTLY_APP_KEY,
+              url: COUNTLY_SERVER_URL,
+              debug: process.env.NODE_ENV === 'development',
+              app_version: '1.0.0'
+            });
 
-        // Track sessions
-        window.Countly.track_sessions();
-      }
+            // Track initial page view
+            window.Countly.track_pageview();
+
+            // Track sessions
+            window.Countly.track_sessions();
+
+            console.log('Countly initialized successfully');
+          } catch (error) {
+            console.error('Countly initialization error:', error);
+          }
+        } else {
+          console.warn('Countly object not available after script load');
+        }
+      };
+
+      script.onerror = () => {
+        console.error('Failed to load Countly SDK from CDN');
+      };
+
+      document.head.appendChild(script);
     };
-    document.head.appendChild(script);
+
+    loadCountlySDK();
 
     // Track page views on route change
     const handleRouteChange = (url: string) => {

@@ -8,39 +8,92 @@ export default function CountlyTest() {
   const [testResults, setTestResults] = useState<string[]>([]);
 
   useEffect(() => {
+    let checkCount = 0;
+
     // Check if Countly is loaded
     const checkCountly = () => {
-      if (typeof window !== 'undefined' && typeof window.Countly !== 'undefined') {
+      checkCount++;
+      const isLoaded = typeof window !== 'undefined' &&
+                      typeof window.Countly !== 'undefined' &&
+                      window.Countly &&
+                      typeof window.Countly.add_event === 'function';
+
+      if (isLoaded) {
         setIsCountlyLoaded(true);
-        setTestResults(prev => [...prev, '✅ Countly SDK loaded successfully']);
+        setTestResults(prev => [...prev, `✅ Countly SDK loaded successfully (attempt ${checkCount})`]);
+        setTestResults(prev => [...prev, `ℹ️ Server URL: ${process.env.NEXT_PUBLIC_COUNTLY_SERVER_URL}`]);
+        setTestResults(prev => [...prev, `ℹ️ App Key: ${process.env.NEXT_PUBLIC_COUNTLY_APP_KEY ? 'Set' : 'Not set'}`]);
       } else {
         setIsCountlyLoaded(false);
-        setTestResults(prev => [...prev, '❌ Countly SDK not loaded']);
+        setTestResults(prev => [...prev, `❌ Countly SDK not loaded (attempt ${checkCount})`]);
+        setTestResults(prev => [...prev, `🔍 Checking window.Countly: ${typeof window.Countly}`]);
+        setTestResults(prev => [...prev, `🔍 Checking add_event: ${typeof window.Countly?.add_event}`]);
       }
     };
 
-    // Check immediately and after delays
+    // Check multiple times with increasing delays
     checkCountly();
-    const timer1 = setTimeout(checkCountly, 2000);
-    const timer2 = setTimeout(checkCountly, 5000);
+    const timers = [
+      setTimeout(checkCountly, 1000),
+      setTimeout(checkCountly, 3000),
+      setTimeout(checkCountly, 6000),
+      setTimeout(checkCountly, 10000)
+    ];
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      timers.forEach(clearTimeout);
     };
   }, []);
 
   const testEvent = () => {
-    trackEvent('test_event', {
-      test_type: 'countly_integration',
-      timestamp: new Date().toISOString()
-    });
-    setTestResults(prev => [...prev, '📤 Test event sent']);
+    try {
+      trackEvent('test_event', {
+        test_type: 'countly_integration',
+        timestamp: new Date().toISOString(),
+        page: window.location.pathname
+      });
+      setTestResults(prev => [...prev, '📤 Test event sent']);
+    } catch (error) {
+      setTestResults(prev => [...prev, `❌ Event error: ${error.message}`]);
+    }
   };
 
   const testConversion = () => {
-    trackConversion('test_conversion', 1);
-    setTestResults(prev => [...prev, '🎯 Test conversion sent']);
+    try {
+      trackConversion('test_conversion', 1);
+      setTestResults(prev => [...prev, '🎯 Test conversion sent']);
+    } catch (error) {
+      setTestResults(prev => [...prev, `❌ Conversion error: ${error.message}`]);
+    }
+  };
+
+  const manualInit = () => {
+    try {
+      if (typeof window.Countly !== 'undefined') {
+        const appKey = process.env.NEXT_PUBLIC_COUNTLY_APP_KEY;
+        const serverUrl = process.env.NEXT_PUBLIC_COUNTLY_SERVER_URL;
+
+        window.Countly.init({
+          app_key: appKey,
+          url: serverUrl,
+          debug: true
+        });
+
+        setTestResults(prev => [...prev, '🔧 Manual initialization attempted']);
+        setTimeout(() => {
+          if (window.Countly && typeof window.Countly.add_event === 'function') {
+            setTestResults(prev => [...prev, '✅ Manual initialization successful']);
+            setIsCountlyLoaded(true);
+          } else {
+            setTestResults(prev => [...prev, '❌ Manual initialization failed']);
+          }
+        }, 1000);
+      } else {
+        setTestResults(prev => [...prev, '❌ Countly object not available for manual init']);
+      }
+    } catch (error) {
+      setTestResults(prev => [...prev, `❌ Manual init error: ${error.message}`]);
+    }
   };
 
   return (
@@ -66,7 +119,13 @@ export default function CountlyTest() {
 
       <div className="mb-4">
         <h3 className="font-medium mb-2">Test Actions:</h3>
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-2 mb-4 flex-wrap">
+          <button
+            onClick={manualInit}
+            className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+          >
+            Manual Init
+          </button>
           <button
             onClick={testEvent}
             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
