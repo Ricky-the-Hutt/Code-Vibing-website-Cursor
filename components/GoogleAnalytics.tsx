@@ -17,16 +17,26 @@ export default function CountlyAnalytics() {
   useEffect(() => {
     if (!COUNTLY_APP_KEY) return;
 
-    // Load Countly SDK - try multiple sources
+    // Load Countly SDK - try direct from Countly server
     const loadCountlySDK = () => {
-      // First try the official Countly CDN
+      console.log('Attempting to load Countly SDK...');
+
+      // Try loading from the Countly server first
       const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/countly-sdk-web@latest/lib/countly.min.js';
+      script.src = `${COUNTLY_SERVER_URL}/sdk/web/countly.min.js`;
       script.async = true;
 
       script.onload = () => {
+        console.log('Countly script loaded, checking for Countly object...');
+        console.log('window.Countly:', window.Countly);
+
         if (typeof window.Countly !== 'undefined') {
           try {
+            console.log('Initializing Countly with:', {
+              app_key: COUNTLY_APP_KEY,
+              url: COUNTLY_SERVER_URL
+            });
+
             window.Countly.init({
               app_key: COUNTLY_APP_KEY,
               url: COUNTLY_SERVER_URL,
@@ -46,14 +56,47 @@ export default function CountlyAnalytics() {
           }
         } else {
           console.warn('Countly object not available after script load');
+          // Try fallback CDN
+          loadFallbackSDK();
         }
       };
 
-      script.onerror = () => {
-        console.error('Failed to load Countly SDK from CDN');
+      script.onerror = (error) => {
+        console.error('Failed to load Countly SDK from server, trying fallback...');
+        loadFallbackSDK();
       };
 
       document.head.appendChild(script);
+    };
+
+    const loadFallbackSDK = () => {
+      console.log('Loading fallback Countly SDK from CDN...');
+
+      const fallbackScript = document.createElement('script');
+      fallbackScript.src = 'https://cdn.jsdelivr.net/npm/countly-sdk-web@latest/lib/countly.min.js';
+      fallbackScript.async = true;
+
+      fallbackScript.onload = () => {
+        console.log('Fallback script loaded, checking Countly object...');
+        if (typeof window.Countly !== 'undefined') {
+          try {
+            window.Countly.init({
+              app_key: COUNTLY_APP_KEY,
+              url: COUNTLY_SERVER_URL,
+              debug: process.env.NODE_ENV === 'development'
+            });
+            console.log('Countly fallback initialization successful');
+          } catch (error) {
+            console.error('Countly fallback initialization failed:', error);
+          }
+        }
+      };
+
+      fallbackScript.onerror = () => {
+        console.error('Countly fallback SDK also failed to load');
+      };
+
+      document.head.appendChild(fallbackScript);
     };
 
     loadCountlySDK();
