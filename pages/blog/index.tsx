@@ -36,20 +36,7 @@ export default function Blog({ posts }: BlogProps) {
         <meta name="description" content="Ricardo Lopes Blog" />
       </Head>
 
-      <div className="max-w-2xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-gray-900 dark:text-gray-300">Blog & News</h1>
-
-        {/* Search Bar */}
-        <div className="mb-8">
-          <input
-            type="text"
-            placeholder="Search posts..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded focus:border-gray-500 dark:focus:border-gray-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-300"
-          />
-        </div>
-
+      <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Blog Posts */}
         {filteredPosts.length === 0 ? (
           <p className="text-gray-600 dark:text-gray-400 text-center py-8">No blog posts found.</p>
@@ -61,7 +48,7 @@ export default function Blog({ posts }: BlogProps) {
                 className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0"
               >
                 <Link href={`/blog/${post.slug}`} className="block group">
-                  <h2 className="text-xl font-semibold mb-2 group-hover:underline text-gray-900 dark:text-gray-300">
+                  <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-300">
                     {post.title}
                   </h2>
                   <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
@@ -73,6 +60,17 @@ export default function Blog({ posts }: BlogProps) {
             ))}
           </div>
         )}
+
+        {/* Search Bar - Moved to Bottom */}
+        <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-900">
+          <input
+            type="text"
+            placeholder="Search posts..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded focus:border-gray-500 dark:focus:border-gray-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-300"
+          />
+        </div>
       </div>
     </>
   );

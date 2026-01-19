@@ -18,7 +18,7 @@ export default function AboutPage({ page }: AboutPageProps) {
                 <meta name="description" content={`Learn more about ${page.title}`} />
             </Head>
 
-            <div className="max-w-2xl mx-auto px-4 py-12">
+            <div className="max-w-4xl mx-auto px-4 py-12">
                 <article
                     className="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: page.body }}

@@ -1,6 +1,7 @@
 # For local development - no authentication required
 backend:
   name: git-gateway
+local_backend: true
 
 # For production - requires GitHub authentication
 # backend:

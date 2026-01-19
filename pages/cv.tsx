@@ -29,7 +29,7 @@ export default function CV() {
         <meta name="description" content="Download Ricardo Lopes CV" />
       </Head>
 
-      <div className="max-w-2xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8">{t.heading}</h1>
 
         <div className="mb-8">

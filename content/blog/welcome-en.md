@@ -1,6 +1,6 @@
 ---
-title: Welcome to My Blog
-date: 2024-01-16
+title: Welcome
+date: 2026-01-19T10:44:00.000+00:00
 excerpt: This is my first blog post showcasing my Code Vibing skills.
 locale: en
 ---

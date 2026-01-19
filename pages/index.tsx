@@ -5,6 +5,8 @@ import { getBlogPosts } from '@/lib/blog';
 import { GetStaticProps } from 'next';
 import { format } from 'date-fns';
 
+import { useABTest } from '@/components/ManualABTesting';
+
 interface HomeProps {
   recentPosts: Array<{
     slug: string;
@@ -15,30 +17,37 @@ interface HomeProps {
 }
 
 export default function Home({ recentPosts }: HomeProps) {
+  // Manual A/B Test Example: Different Hero Descriptions
+  const heroVariant = useABTest('hero_description', ['control', 'vibe_focus']);
+
+  const descriptions = {
+    control: "I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills.",
+    vibe_focus: "Welcome! I'm Ricardo. Explore my journey in Vibe Coding and see how I build modern web experiences."
+  };
+
   return (
     <>
       <Head>
         <title>Ricardo Lopes</title>
-        <meta name="description" content="I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills." />
+        <meta name="description" content={descriptions[heroVariant as keyof typeof descriptions] || descriptions.control} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="max-w-2xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-12">
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">Ricardo Lopes</h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills.
+            {descriptions[heroVariant as keyof typeof descriptions] || descriptions.control}
           </p>
         </div>
 
         {recentPosts.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-300">Blog</h2>
             <div className="space-y-6">
               {recentPosts.map((post) => (
                 <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
                   <Link href={`/blog/${post.slug}`} className="block group">
-                    <h3 className="text-xl font-semibold mb-2 group-hover:underline text-gray-900 dark:text-gray-100">
+                    <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
                       {post.title}
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
@@ -50,13 +59,12 @@ export default function Home({ recentPosts }: HomeProps) {
               ))}
             </div>
             <div className="mt-6">
-              <Link href="/blog" className="text-sm hover:underline text-gray-900 dark:text-gray-300">
+              <Link href="/blog" className="text-sm text-gray-900 dark:text-gray-300">
                 All posts →
               </Link>
             </div>
           </section>
         )}
-
       </div>
     </>
   );

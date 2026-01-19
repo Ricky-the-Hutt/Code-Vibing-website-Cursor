@@ -6,7 +6,7 @@ This document outlines the rules, conventions, and guidelines for working on thi
 
 **Website Name:** Ricardo Lopes Portfolio  
 **Purpose:** Personal portfolio website showcasing work, background, and CV  
-**Design Style:** Minimalist, inspired by [lalitm.com](https://lalitm.com)  
+**Design Style:** Clean, text-heavy minimalist aesthetic with focus on typography and hierarchy  
 **Target Audience:** Recruiters and potential employers
 
 ## Technology Selection Policy
@@ -150,9 +150,6 @@ Create `.env.local` for local development:
 NEXT_PUBLIC_COUNTLY_APP_KEY=your-countly-app-key
 NEXT_PUBLIC_COUNTLY_SERVER_URL=https://us-try.count.ly
 
-# Convert.com (A/B Testing)
-NEXT_PUBLIC_CONVERT_PROJECT_ID=your-convert-project-id
-
 # Giscus Comments (optional)
 NEXT_PUBLIC_GISCUS_REPO=your-username/your-repo
 NEXT_PUBLIC_GISCUS_REPO_ID=your-repo-id
@@ -222,7 +219,7 @@ NEXT_PUBLIC_DEPLOY_DATE=
 - **Format:** Clear, descriptive messages
 - **Examples:**
   - "Add Vercel Speed Insights for performance monitoring"
-  - "Redesign website to match minimalist lalitm.com style"
+  - "Redesign website to match minimalist typographic style"
 
 
 ### Branching
@@ -310,7 +307,7 @@ NEXT_PUBLIC_DEPLOY_DATE=
 - **Next.js Docs:** https://nextjs.org/docs
 - **Tailwind CSS:** https://tailwindcss.com/docs
 - **Vercel Docs:** https://vercel.com/docs
-- **Design Reference:** https://lalitm.com
+- **Design Reference:** Clean, typographic portfolio  
 
 ---
 

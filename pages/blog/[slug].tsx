@@ -30,10 +30,10 @@ export default function BlogPost({ post }: BlogPostProps) {
         <meta name="description" content={post.title} />
       </Head>
 
-      <div className="max-w-2xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-12">
         <Link
           href="/blog"
-          className="text-gray-600 dark:text-gray-400 hover:underline mb-8 inline-block text-sm"
+          className="text-gray-600 dark:text-gray-400 mb-8 inline-block text-sm"
         >
           ← Back to Blog
         </Link>
