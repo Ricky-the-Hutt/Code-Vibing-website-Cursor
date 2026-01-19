@@ -14,7 +14,7 @@ export const generateRssFeed = async () => {
 
     const feed = new Feed({
         title: 'Ricardo Lopes Blog',
-        description: "I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills.",
+        description: "I'm Ricardo, showcasing my work, background, and CV to demonstrate my AI skills.",
         id: siteURL,
         link: siteURL,
         image: `${siteURL}/favicon.ico`,

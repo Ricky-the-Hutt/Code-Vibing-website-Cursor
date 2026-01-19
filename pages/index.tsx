@@ -20,11 +20,11 @@ interface HomeProps {
 
 export default function Home({ recentPosts, homeContent }: HomeProps) {
   // Manual A/B Test Example: Different Hero Descriptions
-  const heroVariant = useABTest('hero_description', ['control', 'vibe_focus']);
+  const heroVariant = useABTest('hero_description', ['control', 'ai_focus']);
 
   const descriptions = {
-    control: homeContent?.data?.description_control || "I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills.",
-    vibe_focus: homeContent?.data?.description_vibe || "Welcome! I'm Ricardo. Explore my journey in Vibe Coding and see how I build modern web experiences."
+    control: homeContent?.data?.description_control || "I'm Ricardo, showcasing my work, background, and CV to demonstrate my AI skills.",
+    ai_focus: homeContent?.data?.description_ai || "Welcome! I'm Ricardo. Explore my journey in AI and see how I build modern web experiences."
   };
 
   const name = homeContent?.data?.name || "Ricardo Lopes";

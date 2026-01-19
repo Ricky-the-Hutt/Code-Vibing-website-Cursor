@@ -1,6 +1,6 @@
-# Ricardo Lopes - Code Vibing Website
+# Ricardo Lopes - AI Website
 
-My first Code Vibing website using Cursor, built with Next.js, TypeScript, and Tailwind CSS.
+My first AI website using Cursor, built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
 
@@ -148,4 +148,4 @@ This project is open source and available for personal use.
 
 ---
 
-**Ricardo knows how to Code Vibe** 🚀
+**Ricardo knows how to build stuff with AI** 🚀

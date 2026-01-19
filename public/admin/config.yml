@@ -36,7 +36,7 @@ collections:
         fields:
           - {label: "Name", name: "name", widget: "string"}
           - {label: "Description (Control)", name: "description_control", widget: "text"}
-          - {label: "Description (Vibe Focus)", name: "description_vibe", widget: "text"}
+          - {label: "Description (AI Focus)", name: "description_ai", widget: "text"}
 
       - label: "About Page"
         name: "about"

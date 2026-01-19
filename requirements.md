@@ -5,13 +5,13 @@ This document outlines the non-technical requirements, content needs, and busine
 ## 1. Project Overview
 
 ### Purpose & Goals
-- **What is the main purpose of this website?** Learn how to Code Vibe.
+- **What is the main purpose of this website?** Learn how to use AI to build stuff.
 - **What are the primary goals?** Showcase work and my backgroung, work and CV.
-- **Target audience:** This website is to showcase to recruters that I am able to use Code Vibing to create websites and applications.
+- **Target audience:** This website is to showcase to recruters that I am able to use AI to create websites and applications.
 
 ### Project Name
 - **Website name/title:** Ricardo Lopes
-- **Tagline (if any):** Ricardo knows how to Code Vibe
+- **Tagline (if any):** Ricardo knows how to build stuff using AI
 
 ---
 
