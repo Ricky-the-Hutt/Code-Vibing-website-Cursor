@@ -8,7 +8,7 @@ export default function Header() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <nav role="navigation">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-2xl font-light no-underline text-gray-900 dark:text-gray-300">
+            <Link href="/" className="text-2xl font-light no-underline text-gray-900 dark:text-gray-300" style={{ fontFamily: 'Georgia, serif' }}>
               Looking after goodness and truth
             </Link>
             <div className="flex items-center">
