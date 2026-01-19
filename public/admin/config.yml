@@ -30,6 +30,14 @@ collections:
   - name: "pages"
     label: "Pages"
     files:
+      - label: "Home Page"
+        name: "home"
+        file: "content/pages/home.md"
+        fields:
+          - {label: "Name", name: "name", widget: "string"}
+          - {label: "Description (Control)", name: "description_control", widget: "text"}
+          - {label: "Description (Vibe Focus)", name: "description_vibe", widget: "text"}
+
       - label: "About Page"
         name: "about"
         file: "content/pages/about.md"

@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { getBlogPosts } from '@/lib/blog';
+import { getPageContent, PageContent } from '@/lib/pages';
 import { GetStaticProps } from 'next';
 import { format } from 'date-fns';
 
@@ -14,28 +15,31 @@ interface HomeProps {
     date: string;
     excerpt: string;
   }>;
+  homeContent: PageContent | null;
 }
 
-export default function Home({ recentPosts }: HomeProps) {
+export default function Home({ recentPosts, homeContent }: HomeProps) {
   // Manual A/B Test Example: Different Hero Descriptions
   const heroVariant = useABTest('hero_description', ['control', 'vibe_focus']);
 
   const descriptions = {
-    control: "I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills.",
-    vibe_focus: "Welcome! I'm Ricardo. Explore my journey in Vibe Coding and see how I build modern web experiences."
+    control: homeContent?.data?.description_control || "I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills.",
+    vibe_focus: homeContent?.data?.description_vibe || "Welcome! I'm Ricardo. Explore my journey in Vibe Coding and see how I build modern web experiences."
   };
+
+  const name = homeContent?.data?.name || "Ricardo Lopes";
 
   return (
     <>
       <Head>
-        <title>Ricardo Lopes</title>
+        <title>{name}</title>
         <meta name="description" content={descriptions[heroVariant as keyof typeof descriptions] || descriptions.control} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">Ricardo Lopes</h1>
+          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">{name}</h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             {descriptions[heroVariant as keyof typeof descriptions] || descriptions.control}
           </p>
@@ -72,6 +76,8 @@ export default function Home({ recentPosts }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPosts = getBlogPosts('en');
+  const homeContent = await getPageContent('home');
+
   const recentPosts = allPosts
     .sort((a, b) => {
       if (a.date < b.date) return 1;
@@ -83,6 +89,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       recentPosts,
+      homeContent,
     },
   };
 };

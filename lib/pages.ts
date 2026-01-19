@@ -9,6 +9,7 @@ const pagesDirectory = path.join(process.cwd(), 'content/pages');
 export interface PageContent {
     title: string;
     body: string;
+    data?: any;
 }
 
 export async function getPageContent(name: string): Promise<PageContent | null> {
@@ -27,5 +28,6 @@ export async function getPageContent(name: string): Promise<PageContent | null> 
     return {
         title: data.title || '',
         body: contentHtml,
+        data: data,
     };
 }
