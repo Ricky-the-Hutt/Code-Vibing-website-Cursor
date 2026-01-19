@@ -45,7 +45,7 @@ export default function Home({ recentPosts }: HomeProps) {
           <section className="mb-12">
             <div className="space-y-6">
               {recentPosts.map((post) => (
-                <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
+                <article key={post.slug} className="mb-8">
                   <Link href={`/blog/${post.slug}`} className="block group">
                     <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
                       {post.title}

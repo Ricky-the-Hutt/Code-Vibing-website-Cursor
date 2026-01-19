@@ -43,10 +43,7 @@ export default function Blog({ posts }: BlogProps) {
         ) : (
           <div className="space-y-6">
             {filteredPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0"
-              >
+              <article key={post.slug} className="mb-8">
                 <Link href={`/blog/${post.slug}`} className="block group">
                   <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-300">
                     {post.title}
@@ -62,7 +59,7 @@ export default function Blog({ posts }: BlogProps) {
         )}
 
         {/* Search Bar - Moved to Bottom */}
-        <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-900">
+        <div className="mt-16 pt-8">
           <input
             type="text"
             placeholder="Search posts..."

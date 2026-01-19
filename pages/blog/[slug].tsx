@@ -52,7 +52,7 @@ export default function BlogPost({ post }: BlogPostProps) {
           />
 
           {/* Comments Section */}
-          <div className="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
+          <div className="mt-12 pt-8">
             <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-300">
               Comments
             </h2>
