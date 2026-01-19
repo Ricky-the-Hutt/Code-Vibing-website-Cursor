@@ -28,16 +28,16 @@ module.exports = {
               },
             },
             h1: {
-              color: '#111827',
+              color: 'inherit',
             },
             h2: {
-              color: '#111827',
+              color: 'inherit',
             },
             h3: {
-              color: '#111827',
+              color: 'inherit',
             },
             strong: {
-              color: '#111827',
+              color: 'inherit',
             },
           },
         },

@@ -30,13 +30,13 @@ export default function CV() {
       </Head>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8">{t.heading}</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-900 dark:text-gray-300">{t.heading}</h1>
 
         <div className="mb-8">
           <a
             href="/cv.pdf"
             download
-            className="inline-block text-gray-900 border border-gray-300 px-6 py-2 rounded hover:bg-gray-50 transition-colors"
+            className="inline-block text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-700 px-6 py-2 rounded hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
           >
             {t.download}
           </a>
