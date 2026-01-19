@@ -33,9 +33,6 @@ export default function CV() {
         <h1 className="text-4xl font-bold mb-8">{t.heading}</h1>
 
         <div className="mb-8">
-          <p className="text-gray-700 mb-4">
-            {t.note}
-          </p>
           <a
             href="/cv.pdf"
             download
@@ -43,15 +40,6 @@ export default function CV() {
           >
             {t.download}
           </a>
-        </div>
-
-        {/* Placeholder for CV preview or embed */}
-        <div className="mt-8">
-          <iframe
-            src="/cv.pdf"
-            className="w-full h-screen border border-gray-300 rounded"
-            title="CV Preview"
-          />
         </div>
       </div>
     </>
