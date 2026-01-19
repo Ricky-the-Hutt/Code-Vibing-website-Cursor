@@ -10,7 +10,6 @@ interface BlogPost {
   title: string;
   date: string;
   excerpt: string;
-  locale: string;
 }
 
 interface BlogProps {
@@ -77,7 +76,7 @@ import { generateRssFeed } from '@/lib/generate-rss';
 
 export const getStaticProps: GetStaticProps = async () => {
   await generateRssFeed();
-  const posts = getBlogPosts('en');
+  const posts = getBlogPosts();
   return {
     props: {
       posts,

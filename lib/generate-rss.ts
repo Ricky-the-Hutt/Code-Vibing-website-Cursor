@@ -3,7 +3,7 @@ import { Feed } from 'feed';
 import { getBlogPosts } from './blog';
 
 export const generateRssFeed = async () => {
-    const posts = getBlogPosts('en');
+    const posts = getBlogPosts();
     const siteURL = 'https://rickylopes.pt';
     const date = new Date();
     const author = {

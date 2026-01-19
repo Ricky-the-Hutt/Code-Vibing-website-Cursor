@@ -12,10 +12,9 @@ export interface BlogPost {
   date: string;
   excerpt: string;
   content: string;
-  locale: string;
 }
 
-export function getBlogPosts(locale: string = 'en'): Omit<BlogPost, 'content'>[] {
+export function getBlogPosts(): Omit<BlogPost, 'content'>[] {
   if (!fs.existsSync(postsDirectory)) {
     return [];
   }
@@ -27,17 +26,15 @@ export function getBlogPosts(locale: string = 'en'): Omit<BlogPost, 'content'>[]
       const slug = fileName.replace(/\.md$/, '');
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data, content } = matter(fileContents);
+      const { data } = matter(fileContents);
 
       return {
         slug,
         title: data.title || '',
         date: data.date ? String(data.date) : '',
         excerpt: data.excerpt || '',
-        locale: data.locale || 'en',
       };
     })
-    .filter((post) => post.locale === locale)
     .sort((a, b) => {
       if (a.date < b.date) {
         return 1;
@@ -49,19 +46,15 @@ export function getBlogPosts(locale: string = 'en'): Omit<BlogPost, 'content'>[]
   return allPostsData;
 }
 
-export function getBlogPostBySlug(slug: string, locale: string = 'en'): BlogPost | null {
+export function getBlogPostBySlug(slug: string): BlogPost | null {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
-  
+
   if (!fs.existsSync(fullPath)) {
     return null;
   }
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
-
-  if (data.locale !== locale) {
-    return null;
-  }
 
   const processedContent = remark().use(html).processSync(content);
   const contentHtml = processedContent.toString();
@@ -72,7 +65,6 @@ export function getBlogPostBySlug(slug: string, locale: string = 'en'): BlogPost
     date: data.date ? String(data.date) : '',
     excerpt: data.excerpt || '',
     content: contentHtml,
-    locale: data.locale || 'en',
   };
 }
 

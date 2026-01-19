@@ -2,7 +2,6 @@
 title: Welcome
 date: 2026-01-19T10:44:00.000+00:00
 excerpt: This is my first blog post
-locale: en
 ---
 Welcome to my blog! This website demonstrates my ability to create modern, responsive websites using AI.
 

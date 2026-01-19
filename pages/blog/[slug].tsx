@@ -11,7 +11,6 @@ interface BlogPost {
   title: string;
   date: string;
   content: string;
-  locale: string;
 }
 
 interface BlogPostProps {
@@ -70,7 +69,7 @@ export default function BlogPost({ post }: BlogPostProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getBlogPosts('en');
+  const posts = getBlogPosts();
   const paths = posts.map((post) => ({
     params: { slug: post.slug },
   }));
@@ -83,7 +82,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
-  const post = getBlogPostBySlug(slug, 'en');
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     return {

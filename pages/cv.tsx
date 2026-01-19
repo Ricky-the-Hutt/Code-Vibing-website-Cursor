@@ -1,22 +1,13 @@
 import { GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import fs from 'fs';
 import path from 'path';
 
-const translations = {
-  en: {
-    title: 'CV Download - Ricardo Lopes',
-    heading: 'Curriculum Vitae',
-    download: 'Download CV',
-    unavailable: 'CV Coming Soon',
-  },
-  pt: {
-    title: 'Descarregar CV - Ricardo Lopes',
-    heading: 'Curriculum Vitae',
-    download: 'Descarregar CV',
-    unavailable: 'CV Disponível em breve',
-  },
+const t = {
+  title: 'CV Download - Ricardo Lopes',
+  heading: 'Curriculum Vitae',
+  download: 'Download CV',
+  unavailable: 'CV Coming Soon',
 };
 
 interface CVProps {
@@ -24,10 +15,6 @@ interface CVProps {
 }
 
 export default function CV({ hasCV }: CVProps) {
-  const router = useRouter();
-  const { locale } = router;
-  const t = translations[locale as keyof typeof translations] || translations.en;
-
   return (
     <>
       <Head>

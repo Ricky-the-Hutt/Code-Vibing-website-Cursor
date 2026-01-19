@@ -75,7 +75,7 @@ export default function Home({ recentPosts, homeContent }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPosts = getBlogPosts('en');
+  const allPosts = getBlogPosts();
   const homeContent = await getPageContent('home');
 
   const recentPosts = allPosts

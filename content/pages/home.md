@@ -1,5 +1,7 @@
 ---
 name: Ricardo Lopes
-description_control: "I'm Ricardo, showcasing my work, background, and CV to demonstrate my Vibe Coding skills."
-description_vibe: "Welcome! I'm Ricardo. Explore my journey in Vibe Coding and see how I build modern web experiences."
+description_control: Hi there 👋🏻, I'm Ricardo aka Ricky, I'm using this
+  website to learn and test all the potential of using AI to build stuff.
+description_vibe: Welcome! I'm Ricardo. Explore my journey in AI and see how I
+  build modern web experiences.
 ---
