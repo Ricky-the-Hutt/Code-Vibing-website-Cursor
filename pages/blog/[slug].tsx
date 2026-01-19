@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getBlogPosts, getBlogPostBySlug } from '@/lib/blog';
 import { format } from 'date-fns';
-import Comments from '@/components/Comments';
 
 interface BlogPost {
   slug: string;
@@ -18,8 +17,6 @@ interface BlogPostProps {
 }
 
 export default function BlogPost({ post }: BlogPostProps) {
-  // Cusdis configuration
-  const cusdisAppId = process.env.NEXT_PUBLIC_CUSDIS_APP_ID || 'your-cusdis-app-id';
 
 
   return (
@@ -50,18 +47,6 @@ export default function BlogPost({ post }: BlogPostProps) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          {/* Comments Section */}
-          <div className="mt-12 pt-8">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-300">
-              Comments
-            </h2>
-            <Comments
-              appId={cusdisAppId}
-              pageId={post.slug}
-              pageTitle={post.title}
-              pageUrl={`https://rickylopes.pt/blog/${post.slug}`}
-            />
-          </div>
         </article>
       </div>
     </>
