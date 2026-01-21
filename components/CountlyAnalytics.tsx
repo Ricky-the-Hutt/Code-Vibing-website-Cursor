@@ -136,7 +136,7 @@ export default function CountlyAnalytics() {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events, COUNTLY_APP_KEY, COUNTLY_SERVER_URL]);
+  }, [consentGiven, router.events, COUNTLY_APP_KEY, COUNTLY_SERVER_URL]);
 
   if (!COUNTLY_APP_KEY) {
     return null;

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import CookieConsent from 'react-cookie-consent';
-import { trackEvent } from './CountlyAnalytics';
+import { trackEvent } from '@/lib/analytics';
 
 export default function CookieConsentBanner() {
   const [showBanner, setShowBanner] = useState(false);
@@ -99,7 +99,7 @@ export default function CookieConsentBanner() {
         </p>
         <div className="text-sm opacity-90">
           <p className="mb-2">
-            <strong>Analytics:</strong> 
+            <strong>Analytics:</strong>
             This helps us improve the user experience.
           </p>
         </div>

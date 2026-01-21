@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { trackEvent } from './CountlyAnalytics';
+import { trackEvent, setUserProperty } from '@/lib/analytics';
 
 /**
  * A custom hook for manual A/B testing.
@@ -27,24 +27,20 @@ export function useABTest(experimentId: string, variants: string[]): string {
 
     setVariant(assignedVariant);
 
-    // Track the variant assignment in Countly
-    // We send it as a user property so we can filter any event by this experiment variant
-    if (window.Countly) {
-      console.log(`[AB Test] Experiment "${experimentId}" assigned variant: ${assignedVariant}`);
-      
-      try {
-        // Set as user property for long-term segmentation
-        window.Countly.userData.set(`exp_${experimentId}`, assignedVariant);
-        window.Countly.userData.save();
+    // Track the variant assignment in both analytics providers
+    console.log(`[AB Test] Experiment "${experimentId}" assigned variant: ${assignedVariant}`);
 
-        // Also track as a one-time event for immediate conversion funnel analysis
-        trackEvent('experiment_assignment', {
-          experiment_id: experimentId,
-          variant: assignedVariant
-        });
-      } catch (error) {
-        console.error('Error tracking experiment in Countly:', error);
-      }
+    try {
+      // Set as user property for long-term segmentation
+      setUserProperty(`exp_${experimentId}`, assignedVariant);
+
+      // Also track as a one-time event for immediate conversion funnel analysis
+      trackEvent('experiment_assignment', {
+        experiment_id: experimentId,
+        variant: assignedVariant
+      });
+    } catch (error) {
+      console.error('Error tracking experiment:', error);
     }
   }, [experimentId, variants]);
 
