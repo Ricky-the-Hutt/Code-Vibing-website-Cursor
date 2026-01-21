@@ -9,23 +9,43 @@ export default function CookieConsentBanner() {
 
   useEffect(() => {
     // Check if user has already made a choice
-    const consentGiven = localStorage.getItem('cookie-consent');
-    const consentDenied = localStorage.getItem('cookie-consent-denied');
+    const checkConsent = () => {
+      const consentGiven = localStorage.getItem('cookie-consent');
+      const consentDenied = localStorage.getItem('cookie-consent-denied');
 
-    if (!consentGiven && !consentDenied) {
-      // Show banner after a short delay to not interrupt initial page load
-      const timer = setTimeout(() => setShowBanner(true), 2000);
-      return () => clearTimeout(timer);
-    }
+      if (!consentGiven && !consentDenied) {
+        // Show banner after a short delay
+        const timer = setTimeout(() => setShowBanner(true), 1000);
+        return () => clearTimeout(timer);
+      } else {
+        setShowBanner(false);
+      }
+    };
+
+    checkConsent();
+
+    // Re-check if local storage is cleared manually
+    const handleStorage = () => checkConsent();
+    window.addEventListener('storage', handleStorage);
+
+    // Also listen for our custom event (useful for debugging resets)
+    window.addEventListener('cookie_consent_reset', handleStorage);
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('cookie_consent_reset', handleStorage);
+    };
   }, []);
 
   const handleAccept = () => {
     localStorage.setItem('cookie-consent', 'true');
     localStorage.removeItem('cookie-consent-denied');
 
+    // Dispatch custom event for same-tab updates
+    window.dispatchEvent(new Event('cookie_consent_updated'));
+
     // Enable tracking
     if (typeof window !== 'undefined' && window.Countly) {
-      // Re-initialize tracking if needed
       trackEvent('cookie_consent_given', {
         consent_type: 'accepted',
         timestamp: new Date().toISOString()

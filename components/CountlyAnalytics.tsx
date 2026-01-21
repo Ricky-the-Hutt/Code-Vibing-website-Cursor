@@ -33,12 +33,14 @@ export default function CountlyAnalytics() {
     };
 
     window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('cookie_consent_updated', checkConsent);
 
     // Also check periodically in case consent is given in the same tab
     const interval = setInterval(checkConsent, 1000);
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('cookie_consent_updated', checkConsent);
       clearInterval(interval);
     };
   }, []);

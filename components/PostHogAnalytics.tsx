@@ -25,16 +25,27 @@ export default function PostHogAnalytics() {
     };
 
     window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('cookie_consent_updated', checkConsent);
+
+    // Also check periodically in case consent is given in the same tab
     const interval = setInterval(checkConsent, 1000);
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('cookie_consent_updated', checkConsent);
       clearInterval(interval);
     };
   }, []);
 
   useEffect(() => {
-    if (!consentGiven || !POSTHOG_KEY) return;
+    if (!POSTHOG_KEY) {
+      console.log('PostHog Analytics: Missing POSTHOG_KEY');
+      return;
+    }
+    if (!consentGiven) {
+      console.log('PostHog Analytics: Consent not given yet');
+      return;
+    }
 
     if (typeof window !== 'undefined') {
       posthog.init(POSTHOG_KEY, {
@@ -42,7 +53,19 @@ export default function PostHogAnalytics() {
         capture_pageview: false, // We'll handle this manually on route changes
         persistence: 'localStorage',
         autocapture: true,
+        // Disable features that require config.js to prevent Safari MIME errors
+        disable_session_recording: true,
+        disable_surveys: true,
+        advanced_disable_decide: true,
+        advanced_disable_feature_flags: true,
+        loaded: (ph) => {
+          if (process.env.NODE_ENV === 'development') console.log('PostHog loaded:', ph);
+        },
       });
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Initializing PostHog with:', { POSTHOG_KEY, POSTHOG_HOST });
+      }
 
       // Track initial page view
       posthog.capture('$pageview');
