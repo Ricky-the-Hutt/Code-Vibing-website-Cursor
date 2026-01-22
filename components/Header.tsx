@@ -28,7 +28,17 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="text-lg sm:text-2xl font-light no-underline text-gray-900 dark:text-gray-300">
+                  <Link
+                    href="/about"
+                    className="text-lg sm:text-2xl font-light no-underline text-gray-900 dark:text-gray-300"
+                    onClick={() => {
+                      if (typeof window !== 'undefined') {
+                        import('posthog-js').then(({ default: posthog }) => {
+                          posthog.capture('clicked_about_link');
+                        });
+                      }
+                    }}
+                  >
                     About
                   </Link>
                 </li>

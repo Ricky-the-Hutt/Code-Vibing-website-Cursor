@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import posthog from 'posthog-js';
 import Head from 'next/head';
 import Link from 'next/link';
 import { getBlogPosts } from '@/lib/blog';
@@ -6,7 +7,7 @@ import { getPageContent, PageContent } from '@/lib/pages';
 import { GetStaticProps } from 'next';
 import { format } from 'date-fns';
 
-import { useABTest } from '@/components/ManualABTesting';
+
 
 interface HomeProps {
   recentPosts: Array<{
@@ -19,13 +20,28 @@ interface HomeProps {
 }
 
 export default function Home({ recentPosts, homeContent }: HomeProps) {
-  // Manual A/B Test Example: Different Hero Descriptions
-  const heroVariant = useABTest('hero_description', ['control', 'ai_focus']);
+  // PostHog A/B Test for Tagline
+  const [taglineVariant, setTaglineVariant] = useState('control');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      posthog.onFeatureFlags(() => {
+        const variant = posthog.getFeatureFlag('tagline-experiment');
+        if (variant) {
+          setTaglineVariant(variant as string);
+        }
+      });
+    }
+  }, []);
 
   const descriptions = {
     control: homeContent?.data?.description_control || "I'm Ricardo, showcasing my work, background, and CV to demonstrate my AI skills.",
-    ai_focus: homeContent?.data?.description_ai || "Welcome! I'm Ricardo. Explore my journey in AI and see how I build modern web experiences."
+    test: null // Remove tagline
   };
+
+  const currentDescription = taglineVariant in descriptions
+    ? descriptions[taglineVariant as keyof typeof descriptions]
+    : descriptions.control;
 
   const name = homeContent?.data?.name || "Ricardo Lopes";
 
@@ -33,16 +49,18 @@ export default function Home({ recentPosts, homeContent }: HomeProps) {
     <>
       <Head>
         <title>{name}</title>
-        <meta name="description" content={descriptions[heroVariant as keyof typeof descriptions] || descriptions.control} />
+        <meta name="description" content={currentDescription || descriptions.control} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">{name}</h1>
-          <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-balance">
-            {descriptions[heroVariant as keyof typeof descriptions] || descriptions.control}
-          </p>
+          {currentDescription && (
+            <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-balance">
+              {currentDescription}
+            </p>
+          )}
         </div>
 
         {recentPosts.length > 0 && (

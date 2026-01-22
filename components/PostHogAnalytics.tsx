@@ -56,8 +56,8 @@ export default function PostHogAnalytics() {
         // Disable features that require config.js to prevent Safari MIME errors
         disable_session_recording: true,
         disable_surveys: true,
-        advanced_disable_decide: true,
-        advanced_disable_feature_flags: true,
+        // advanced_disable_decide: true,
+        // advanced_disable_feature_flags: true,
         loaded: (ph) => {
           if (process.env.NODE_ENV === 'development') console.log('PostHog loaded:', ph);
         },
