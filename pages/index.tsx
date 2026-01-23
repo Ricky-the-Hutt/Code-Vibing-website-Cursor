@@ -57,7 +57,7 @@ export default function Home({ recentPosts, homeContent }: HomeProps) {
         <div className="mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">{name}</h1>
           {currentDescription && (
-            <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-balance">
+            <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
               {currentDescription}
             </p>
           )}
